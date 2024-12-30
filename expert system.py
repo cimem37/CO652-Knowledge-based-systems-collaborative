@@ -1,2 +1,8 @@
-print("collaborative test commit") 
-# eeee
+print("Welcome to the CO652 Knwoledge based systems collaborative project expert system") 
+print(". . . ")
+print(". . . . . . ")
+print(". . . . . . . . . ")
+print(". . . . . . . . . . . . . . . . . .")
+print(". . . . . . . . . . . . . . . . . . . . . . .")
+print(". . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . ")
+print("What type of technical issue are you facing with to start with ?")
