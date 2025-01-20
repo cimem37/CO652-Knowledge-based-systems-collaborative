@@ -13,11 +13,6 @@ if choice == 1:
     print("Have you got the error code of the blue screen of death that is diplayed typically on the monitor (Y/N)")
     error_code = input("What is the blue screen of death error code appearing on screen? 'N': ").strip()
 
-
-
-
-
-
 BSOD_CODES = {
     "0x0000000A": "IRQL_NOT_LESS_OR_EQUAL",
     "0x0000000D": "EXCEPTION_DOUBLE_FAULT",
