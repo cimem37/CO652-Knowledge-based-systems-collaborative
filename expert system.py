@@ -25,9 +25,9 @@ if error_code in BSOD_CODES:
     print(f"Description: {BSOD_CODES[error_code]}")
     print(" instructions instructions instructions")
 else:
-    print("Error not recognised or existing on dataset of system please search the code on :")
-    print("('https://www.hp.com/us-en/shop/tech-takes/how-to-fix-blue-screen-of-death') and" )
-    print("consult with your IT technician")
+    print("Error not recognised or existing on dataset of system please search the code on :" "('https://www.hp.com/us-en/shop/tech-takes/how-to-fix-blue-screen-of-death') and consult with your IT technician")
+
+
 
 
 
