@@ -86,7 +86,6 @@ rules = [
     }
 ]
 
-# Initialize the expert system
 expert_system = ExpertSystem(rules)
 
 while True:  # This is our main menu loop, stops the menu from closing after the user has made a choice
