@@ -29,7 +29,7 @@ def get_valid_choice(prompt, choices):
         except ValueError:
             print("Invalid input. Please enter a valid number.")
 
-
+# These are our problems below, the user will select one of them by entering the corresponding rule number.
 rules = [
     {
         "problem": "computer won't start",
