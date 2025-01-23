@@ -61,26 +61,36 @@ rules = [
             {
                 "code": "0x0000000A: IRQL_NOT_LESS_OR_EQUAL",
                 "solutions": [
-                    "Restart your PC",
-                    "Run Checkdisk",
-                    "Delete System32 (Not recommended)"
+                    "Reinstall/update display and network drivers through device manager. (consideration message) :  different processes depending on dedicated or integrated gpu.  Otherwise uninstall through device manager on Windows right click ( uninstall option ) on both network & display as drivers will be installed automatically (as you removed all existing driver / settings of the machine ).",
+                    "Run Checkdisk:  Disk scan- right click local drive, properties, tools - check /Will do an check disk / error check on the next reboot, if required before you get to the desktop.  That fixes corrupt files on machine that cause blue screen.",
+                    "Run the following command in CMD using administrator mode in order to load the most recent windows restoration point: DISM /ONLINE /CLEANUP-IMAGE /RESTOREHEALTH ",
+                    "Run the SFC /SCANNOW command in CMD with administrator mode- This is a windows file system scan, it reinstalls any corrupt system files.",
+
                 ]
             },
             {
-                "code": "0x0000007B: INACCESSIBLE_BOOT_DEVICE",
+                "code": "0x0000000D: EXCEPTION_DOUBLE_FAULT",
                 "solutions": [
-                    "Check your BIOS settings",
-                    "Ensure the boot drive is connected",
-                    "Run Startup Repair"
+                    "Restore your most recent backup.",
+                    "Create a Windows Media Creation tool using a USB stick or a dvd. Install the Media Creation tool from: https://support.microsoft.com/en-gb/windows/create-installation-media-for-windows-99a58364-8c02-206f-aa6f-40c3b507420d.",
+                    "Run the following command in Windows powershell while in administrator mode: Get-AppxPackage -AllUsers| Foreach {Add-AppxPackage -DisableDevelopmentMode -Register",
+                    "Reboot the system and see if the issue persists."
+                    "Reset your OS to factory default settings by doing the following: Hold the shift button while clicking restart, click advanced options when the menu appears, click reset this pc. Follow the onscreen instruction.",
                 ]
             },
             {
                 "code": "0x0000001E: KMODE_EXCEPTION_NOT_HANDLED",
                 "solutions": [
-                    "Update drivers",
-                    "Run a memory diagnostic",
-                    "Check recently installed software"
+                    "Update or rollback your network and display drivers using device manager",
+                    "Run a memory diagnostic using the Windows memory diagnostic tool",
+                    "Run a malware scan using Windows defender or your anti virus of choice. I reccomend using MalwareBytes",
+                    
+                    
                 ]
+                
+            },
+            {
+                
             }
         ]
     }
@@ -91,6 +101,7 @@ expert_system = ExpertSystem(rules)
 while True:  # This is our main menu loop, stops the menu from closing after the user has made a choice
     # List of problems menu
     print("\nWelcome to the Technical support expert system by Brunaldo Cimo and Hishaam Mehmood!") # Welcome message
+    print("--------------------------------------------------------------------------------------")
     print("Please select a problem to solve:")
     problems = list(set(rule["problem"] for rule in rules))
     for i, problem in enumerate(problems, 1):
