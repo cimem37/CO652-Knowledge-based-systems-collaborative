@@ -83,15 +83,55 @@ rules = [
                 "solutions": [
                     "Update or rollback your network and display drivers using device manager",
                     "Run a memory diagnostic using the Windows memory diagnostic tool",
-                    "Run a malware scan using Windows defender or your anti virus of choice. I reccomend using MalwareBytes",
+                    "Run a malware scan using Windows defender or your anti virus of choice. It is reccomended to use an anti-virus software such as MalwareBytes, which can be installed from here: https://www.malwarebytes.com/",
+
+                ]
+                
+            },
+              {
+                "code": "",
+                "solutions": [
+                    "",
+                    "",
+                    "",  
+                ]
+                
+            },
+              
+              
+              {
+                "code": "",
+                "solutions": [
+                    "",
+                    "",
+                    "",
+                    
                     
                     
                 ]
                 
             },
-            {
+              
+              
+              {
+                "code": "",
+                "solutions": [
+                    "",
+                    "",
+                    "",     
+                ]
                 
-            }
+            },
+              
+              {
+                "code": "",
+                "solutions": [
+                    "",
+                    "",
+                    "",
+                ]
+                
+            },
         ]
     }
 ]
