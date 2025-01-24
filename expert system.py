@@ -418,7 +418,27 @@ malware_issues = {
             "- Select temporary files, cache, and system files > Click Clean Up."
         ]
     },
-    "pop-ups and redirects": {
+    malware_issues = {
+    "virus": {
+        "error_name": "Slow PC Performance (Possible Malware Infection)",
+        "consideration": "This issue may be caused by malware consuming CPU and memory resources, outdated software, or excessive startup programs.",
+        "solutions": [
+            "Run a Full System Scan using Windows Defender or a trusted third-party antivirus software.",
+            "Check for high CPU usage:\n"
+            "- Press Ctrl + Shift + Esc to open Task Manager.\n"
+            "- Look for suspicious processes consuming high CPU/memory.\n"
+            "- Right-click on the process > Open File Location. If it’s unknown, scan it with your antivirus.",
+            "Disable Unnecessary Startup Programs:\n"
+            "- Open Task Manager (Ctrl + Shift + Esc) > Go to the Startup tab.\n"
+            "- Disable any unknown or unnecessary programs.",
+            "Run Windows Updates:\n"
+            "- Go to Settings > Update & Security > Check for updates.",
+            "Perform a Disk Cleanup:\n"
+            "- Open File Explorer > Right-click on the C: Drive > Properties > Disk Cleanup.\n"
+            "- Select temporary files, cache, and system files > Click Clean Up."
+        ]
+    },
+    "popups": {
         "error_name": "Excessive Pop-ups & Browser Redirects",
         "consideration": "This issue is often caused by browser hijackers, adware, or unwanted extensions.",
         "solutions": [
@@ -437,8 +457,8 @@ malware_issues = {
             "- Perform a full system scan and remove detected threats."
         ]
     },
-    "fake antivirus alerts": {
-        "error_name": "Fake Antivirus Pop-ups (Scareware)",
+    "scareware": {
+        "error_name": "scareware",
         "consideration": "Scareware tricks users into believing their PC is infected and urges them to install malicious software.",
         "solutions": [
             "Do NOT Click on the Pop-up:\n"
@@ -455,12 +475,129 @@ malware_issues = {
             "- Remove any suspicious entries redirecting websites (e.g., '127.0.0.1 facebook.com').",
             "Reset Network Settings:\n"
             "- Open Command Prompt as Administrator.\n"
-            "- Run the following commands:\n"
-            "  netsh winsock reset\n"
-            "  ipconfig /flushdns\n"
+            "- Run the following command: netsh winsock reset\n"
             "- Restart your PC."
         ]
-    }
+    },
+  "ransomware": {
+    "error_name": "ransomware",
+    "consideration": "Ransomware encrypts a victim's files, rendering them inaccessible until a ransom is paid.",
+    "solutions": [
+        "Isolate the Infected System:\n"
+        "- Disconnect the device from the internet and other network connections immediately.\n"
+        "- Disable shared drives to prevent the ransomware from spreading.",
+        "Identify the Ransomware:\n"
+        "- Use online tools like ID Ransomware (https://www.nomoreransom.org/).\n"
+        "- Analyze the ransom note or file extensions to determine the ransomware strain.",
+        "Use Decryption Tools (if available):\n"
+        "- Visit No More Ransom (https://www.nomoreransom.org/) to find free decryption tools.\n"
+        "- Download and use the tool for the identified ransomware strain.",
+        "Boot into Safe Mode:\n"
+        "- Restart your PC and repeatedly press F8 (or Shift + Restart for Windows 10/11).\n"
+        "- Select Safe Mode with Networking.\n"
+        "- Run antivirus software in Safe Mode.",
+        "Run Antivirus/Malware Removal Tools:\n"
+        "- Download and install trusted tools such as Malwarebytes or Kaspersky.\n"
+        "- Perform a full system scan to detect and remove the ransomware.",
+        "Restore from Backups:\n"
+        "- If backups exist, format the infected system and restore files from a clean backup.\n"
+        "- Ensure the backup is not connected to the infected system during recovery.",
+        "Remove Ransomware Manually (Advanced):\n"
+        "- Open Task Manager (Ctrl + Shift + Esc) and terminate suspicious processes.\n"
+        "- Check startup programs via msconfig and disable malicious entries.\n"
+        "- Open Registry Editor (regedit) and delete suspicious entries under:\n"
+        "  HKEY_CURRENT_USER\\Software\\Microsoft\\Windows\\CurrentVersion\\Run.",
+        "Use Ransomware Recovery Features:\n"
+        "- Check for shadow copies using the command: vssadmin list shadows.\n"
+        "- Restore files using 'Previous Versions' in file properties.\n"
+        "- On macOS, use Time Machine backups to recover files.",
+        "Seek Professional Assistance:\n"
+        "- Contact a cybersecurity professional or Incident Response team if unable to remove the ransomware.\n"
+        "- Avoid negotiating with attackers directly.",
+        "Rebuild and Reinstall:\n"
+        "- As a last resort, wipe the device completely and reinstall the operating system.\n"
+        "- Format all storage drives before reinstalling."
+    ]
+},
+    {
+        "adware": {
+    "error_name": "adware",
+    "consideration": "Adware displays intrusive ads or pop-ups and may redirect users to malicious websites, potentially compromising privacy.",
+    "solutions": [
+        "Uninstall Suspicious Programs:\n"
+        "- Go to Control Panel > Programs & Features.\n"
+        "- Locate and uninstall recently installed or unfamiliar programs.",
+        "Remove Browser Extensions:\n"
+        "- Check browser extensions or add-ons for anything suspicious.\n"
+        "- Remove unfamiliar or unnecessary extensions.",
+        "Reset Browser Settings:\n"
+        "- Reset the browser to default settings to remove injected ads.\n"
+        "- Clear cache and cookies.",
+        "Use Anti-Adware Tools:\n"
+        "- Download and run trusted anti-adware software like AdwCleaner or Malwarebytes.",
+        "Block Pop-ups:\n"
+        "- Enable the pop-up blocker in your browser settings.\n"
+        "- Use browser extensions like uBlock Origin for additional protection."
+    ]
+}
+    },
+
+  {
+      "trojan": {
+    "error_name": "trojan_horse",
+    "consideration": "Trojan horses disguise themselves as legitimate software while secretly performing malicious activities, like opening backdoors.",
+    "solutions": [
+        "Identify and Remove Suspicious Files:\n"
+        "- Use Task Manager (Ctrl + Shift + Esc) to identify suspicious processes.\n"
+        "- Locate and delete associated files.",
+        "Run a Malware Scan:\n"
+        "- Use trusted antivirus tools to detect and remove Trojans.",
+        "Check and Remove Startup Entries:\n"
+        "- Open Task Manager > Startup tab and disable unknown programs.",
+        "Reinstall Compromised Applications:\n"
+        "- If a Trojan masquerades as a legitimate app, uninstall and download the app from an official source.",
+        "Harden Security Settings:\n"
+        "- Enable a firewall and real-time protection in your antivirus software."
+    ]
+}
+
+  },
+    
+  {
+    "rootkits": {
+    "error_name": "rootkits",
+    "consideration": "Rootkits hide deep within the operating system, providing attackers persistent access while evading detection.",
+    "solutions": [
+    "Use Rootkit Removal Tools:\n"
+    "- Run specialized tools like Kaspersky TDSSKiller or Malwarebytes Anti-Rootkit.",
+    "Boot into Safe Mode:\n"
+    "- Restart your PC and press F8 (or Shift + Restart for Windows 10/11).\n"
+    "- Run an antivirus scan in Safe Mode.",
+    "Update and Reinstall:\n"
+    "- Update antivirus definitions and use them to clean the system.\n"
+    "- As a last resort, format the system and reinstall the operating system."
+    ]
+}
+
+  },
+    "keylogger": {
+    "error_name": "keylogger",
+    "consideration": "Keyloggers monitor and record keystrokes to steal sensitive information, like passwords and credit card details.",
+    "solutions": [
+        "Run a Full Malware Scan:\n"
+        "- Use a trusted antivirus or anti-keylogger tool.",
+        "Check Task Manager for Suspicious Processes:\n"
+        "- Identify and terminate unknown processes related to keyloggers.",
+        "Uninstall Suspicious Software:\n"
+        "- Remove recently installed or unfamiliar software.",
+        "Use a Virtual Keyboard:\n"
+        "- For sensitive tasks, use an on-screen virtual keyboard.",
+        "Enable Multi factor authentication (MFA):\n"
+        "- Secure online accounts with multi-factor authentication to mitigate stolen passwords."
+    ]
+}
+
+}
 }
 
 
@@ -558,7 +695,8 @@ def forward_chaining(category, key):
         "DirectX": directx_errors,
         "DLL Errors": dll_crashes,
         "Firewall": other_issues,
-        "Network": network_fixes
+        "Network": network_fixes,
+        "Malware": malware_issues
     }
     
     # Check if the error exists in the selected category
@@ -782,22 +920,13 @@ def main():
     elif choice == "8":
         troubleshoot()
     elif choice == "9":
-        print("\n🔍 Malware & Virus Troubleshooting:")
         
-        # Dynamically display malware-related issues
-        issue_keys = list(malware_issues.keys())
-        for idx, issue in enumerate(issue_keys, start=1):
-            print(f"{idx}. {malware_issues[issue]['error_name']}")
-
-        # Get user selection
-        malware_choice = input("\nEnter your choice (1-3): ").strip()
-
-        # Validate and process choice
-        if malware_choice.isdigit() and 1 <= int(malware_choice) <= len(issue_keys):
-            selected_issue = issue_keys[int(malware_choice) - 1]
-            forward_chaining("Malware", selected_issue)
-        else:
-            print("⚠️ Invalid selection. Returning to main menu.")
+        print("\n🔍 Malware & Virus Troubleshooting:")
+        malware_type = input("Please enter the malware type: ").strip()
+        print(forward_chaining("Malware", malware_type))
+        
+    else:
+        print("⚠️ Invalid selection. Returning to main menu.")
 
 # Runs the expert system
 if __name__ == "__main__":
