@@ -1,10 +1,10 @@
 # ==========================================
-# 🚀 PC Tech Support Expert System
+# PC Tech Support Expert System by Bruno Cimo and Hishaam Mehmood 
 # ==========================================
 import sys
 
 # -----------------------------
-# 1️⃣ KNOWLEDGE BASE (RULE-BASED SYSTEM)
+# THIS IS OUR KNOWLEDGE BASE (RULE-BASED SYSTEM)
 # -----------------------------
 bsod_errors = {
     "0x0000000A": {
@@ -621,7 +621,7 @@ malware_issues = {
 
 
 # -----------------------------
-# 2️⃣ FRAME-BASED REPRESENTATION (For Hardware Components)
+# THIS IS THE FRAME-BASED REPRESENTATION (For Hardware Components)
 # -----------------------------
 class HardwareComponent:
     """Models hardware components for diagnosis."""
@@ -661,7 +661,7 @@ class HardwareComponent:
 
 
 # -----------------------------
-# 3️⃣ FORWARD CHAINING FUNCTION (Rule-Based System)
+# FORWARD CHAINING FUNCTION (Rule-Based System)
 # -----------------------------
 def forward_chaining(category, key):
     """Matches known error conditions with solutions using forward chaining and interactive troubleshooting."""
@@ -744,7 +744,7 @@ def forward_chaining(category, key):
 
 
 # -----------------------------
-# 4️⃣ BACKWARD CHAINING FUNCTION (Goal-Driven Diagnosis)
+#BACKWARD CHAINING FUNCTION (Goal-Driven Diagnosis)
 # -----------------------------
 def backward_chaining(issue):
     """Verifies possible causes before suggesting a solution using backward chaining."""
@@ -787,7 +787,7 @@ def backward_chaining(issue):
 
 
 # -----------------------------
-# 5️⃣ DECISION TREE FUNCTION (Progressive Troubleshooting)
+# DECISION TREE FUNCTION (Progressive Troubleshooting)
 # -----------------------------
 def troubleshoot():
     """Uses a decision tree to guide users through step-by-step troubleshooting."""
@@ -810,7 +810,7 @@ def troubleshoot():
                 print("🔧 Check Task Manager for high CPU/RAM usage.")
                 print("🔧 Run a malware scan to detect background processes.")
             else:
-                print("✅ Your system seems fine! Keep drivers updated.")
+                print("✅ Your system seems good. Make sure to keep your drivers updated.")
 
 
 
@@ -846,11 +846,10 @@ def troubleshoot():
                 
 
 # -----------------------------
-# 6️⃣ MAIN FUNCTION (User Interaction)
+#  MAIN FUNCTION MENU (User Interaction)
 # -----------------------------
-def main():
-    """Main function that runs the expert system and interacts with the user."""
-    print("\n🚀 Welcome to the PC Tech Support Expert System!")
+def main(): 
+    print("\nWelcome to the PC Tech Support Expert System by Bruno Cimo and Hishaam Mehmood!")
     print("\nSelect an issue:")
     print("1. BSOD Error")
     print("2. GPU Issues")
