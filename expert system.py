@@ -319,9 +319,21 @@ gpu_issues = {
 }
 
 display_errors = {
-    "hdmi not detected": "Check HDMI/DisplayPort/VGA cable connection and update display drivers.",
-    "no signal": "Try a different port, check monitor input settings."
+    "hdmi not detected": {
+        "error_name": "HDMI/Display Not Detected",
+        "consideration": "This issue may be due to faulty cables, incorrect display settings, or GPU issues.",
+        "solutions": [
+            "Check if the HDMI / DisplayPort / VGA cable is properly connected.",
+            "Try using a different cable or a different port to check if the cable is damaged.",
+            "Ensure the HDMI / DP cable is plugged into the correct input/output port on both the PC and monitor.",
+            "If using a dedicated GPU, ensure the HDMI / DP cable is connected to the GPU, not the motherboard.",
+            "Ensure PCIe power cables are properly connected to the GPU.",
+            "Reseat the graphics card (remove it from the PCIe slot and reconnect it).",
+            "Try using a different monitor to check if the current monitor is faulty."
+        ]
+    }
 }
+
 
 motherboard_beep_codes = {
     "3 beeps": "RAM issue → Check RAM compatibility.",
@@ -674,7 +686,8 @@ def forward_chaining(category, key):
         "DLL Errors": dll_crashes,
         "Firewall": other_issues,
         "Network": network_fixes,
-        "Malware": malware_issues
+        "Malware": malware_issues,
+        "Display": display_errors
     }
     
     # Check if the error exists in the selected category
@@ -873,8 +886,8 @@ def main():
         if gpu_choice == "1":
             print(forward_chaining("GPU", "gpu driver timeout"))
     elif choice == "3":
-        print("\nDisplay Troubleshooting:")
-        backward_chaining("hdmi not detected")
+        print("\n🔍 Display Troubleshooting:")
+        (forward_chaining("Display", "hdmi not detected"))
     elif choice == "4":
         print("\nMotherboard Beep Codes:")
         beep_code = input("Enter the beep code number (e.g., 3 beeps): ").strip()
@@ -897,22 +910,12 @@ def main():
     elif choice == "8":
         troubleshoot()
     elif choice == "9":
-        
         print("\n🔍 Malware & Virus Troubleshooting:")
         malware_type = input("Please enter the malware type: ").strip()
         print(forward_chaining("Malware", malware_type))
-        
     else:
         print("⚠️ Invalid selection. Returning to main menu.")
 
 # Runs the expert system
 if __name__ == "__main__":
     main()
-
-
-
-# Test
-
-# test bruno 
-
-# Hishaam was here
