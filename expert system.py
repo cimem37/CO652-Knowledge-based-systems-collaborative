@@ -341,8 +341,22 @@ motherboard_beep_codes = {
 }
 
 dll_crashes = {
-    "missing dll": "Reinstall the missing DLL using Windows System File Checker (sfc /scannow).",
-    "game crash": "Verify integrity of game files and update DirectX."
+    "User32.dll crash": {
+        "error_name": "dll crashes",
+        "solutions": [
+            "Check to see if your program is using the User32.dll file.\n"
+            "press the windows key + R and enter CMD to open the command prompt window and then enter the following command:\n"
+            "tasklist /m User32.dll\n"
+            "If the program does not show up in the tasklist, reinstall it.",
+            
+            "Ensure that your windows is up to date. To open the windows updater, use the following command in the command prompt window:\n"
+            "wupdmgr",
+            
+            "Use the System File checker tool to repair the User32.dll file along with any other windows system files:\n"
+            "Enter the command prompt and type: SFC /scannow\n"
+            "restart your computer after the scan is finished and your files have been successfully validated.\n"
+        ]
+    }
 }
 
 directx_errors = {
@@ -694,31 +708,31 @@ def forward_chaining(category, key):
     if category in rule_sets and key in rule_sets[category]:
         error_data = rule_sets[category][key]
 
-        # 1️⃣ Display the detected error
+        #  Display the detected error
         print(f"\n🔍 Detected {category} Error: {key} - {error_data['error_name']}")
 
-        # 2️⃣ Display consideration message if available
+        #  Display consideration message if available
         if "consideration" in error_data:
             print(f"\n⚠️ Consideration: {error_data['consideration']}")
 
-        # 3️⃣ Loop through solutions step-by-step
+        #  Loop through solutions step-by-step
         solutions = error_data["solutions"]
         for i, solution in enumerate(solutions, start=1):
             print(f"\n🔧 Suggested Solution {i}: {solution}")
             
-            # 4️⃣ Ask the user if the solution worked
+            #  Ask the user if the solution worked
             response = input("\nDid this solution work? (yes/no): ").strip().lower()
 
-            # 5️⃣ Ensure valid input
+            # Ensure valid input
             while response not in ["yes", "no"]:
                 response = input("❌ Invalid input! Please enter 'yes' or 'no': ").strip().lower()
 
-            # 6️⃣ If the solution worked, stop troubleshooting
+            #  If the solution worked, stop troubleshooting
             if response == "yes":
                 print("\n✅ Thank you for using our system! Your issue has been resolved.")
                 return  
 
-        # 7️⃣ If no solution worked, suggest contacting support
+        #  If no solution worked, suggest contacting support
         print("\n❌ No solution worked, consider seeking further assistance.")
     else:
         print("\n⚠️ Error not found. Please check online resources.")
@@ -881,7 +895,7 @@ def main():
         print(forward_chaining("BSOD", code))
     elif choice == "2":
         print("\nGPU Troubleshooting:")
-        print("1. GPU Driver Timeout")
+        print("GPU Driver Timeout")
         gpu_choice = input("Select issue (1): ").strip()
         if gpu_choice == "1":
             print(forward_chaining("GPU", "gpu driver timeout"))
@@ -895,9 +909,12 @@ def main():
             print(f"Detected Issue: {motherboard_beep_codes[beep_code]}")
         else:
             print("⚠️ Unknown beep code.")
+            
     elif choice == "5":
         print("\nDLL or Game Crash Troubleshooting:")
-        backward_chaining("game crash")
+        print(forward_chaining("DLL Errors", "User32.dll crash"))
+        
+        
     elif choice == "6":
         print("\n🔍 DirectX Compatibility Troubleshooting:")
 
