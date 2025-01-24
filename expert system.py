@@ -403,7 +403,7 @@ malware_issues = {
         "error_name": "virus",
         "consideration": "A computer virus is malicious code that infects files or programs, spreads across systems, and disrupts operations or damages data.",
         "solutions": [
-            "Run a Full System Scan:\n"
+            "Disconnect from the internet and run a Full System Scan:\n"
             "- Use trusted antivirus software like Windows Defender, Malwarebytes, or Norton.\n"
             "- Quarantine or delete infected files as recommended.",
             "Boot into Safe Mode:\n"
