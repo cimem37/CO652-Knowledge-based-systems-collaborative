@@ -632,6 +632,85 @@ malware_issues = {
   }
 }
 
+# -----------------------------
+#  BACKWARD CHAINING FUNCTION -NETWORK ISSUES
+# -----------------------------
+def backward_chaining_network():
+    
+    print("\nLet's resolve your network issues...")
+    
+    problem = input("\nWhat is the network issue you're facing? \nOptions: "
+                    "\n1) Weak Wi-Fi signal"
+                    "\n2) High latency, "
+                    "\n3) Unable to access a website, "
+                    "\n4) Slow download speeds, "
+                    "\n5) Inconsistent connection, "
+                    "\n6) Missing Wi-Fi option \nEnter the number of your issue: ").strip()
+    
+    if problem == "1":  # Weak Wi-Fi signal
+        if input("\nAre you far from the router? (yes/no): ").strip().lower() == "yes":
+            print("\n Solution: Move closer to the router or use an Ethernet cable.")
+        elif input("\nAre there walls or obstacles blocking the signal? (yes/no): ").strip().lower() == "yes":
+            print("\n Solution: Remove obstacles or place the router in a central, open area.")
+        elif input("\nIs the router outdated or damaged? (yes/no): ").strip().lower() == "yes":
+            print("\n Solution: Consider upgrading your router.")
+        else:
+            print("\n Solution: Reset your router and check for firmware updates.")
+
+    elif problem == "2":  # High latency
+        if input("\nAre you connected to a server in a far region? (yes/no): ").strip().lower() == "yes":
+            print("\n Solution: Switch to a server region closer to you.")
+        elif input("\nIs your internet connection speed low? (yes/no): ").strip().lower() == "yes":
+            print("\n Solution: Contact your ISP to upgrade your plan or troubleshoot slow speeds.")
+        elif input("\nAre background applications consuming bandwidth? (yes/no): ").strip().lower() == "yes":
+            print("\nSolution: Close unnecessary applications and downloads.")
+        else:
+            print("\n Solution: Restart your router and prioritize devices on your network.")
+
+    elif problem == "3":  # Unable to access a website
+        if input("\nIs the website blocked by a firewall? (yes/no): ").strip().lower() == "yes":
+            print("\n Solution: Configure your firewall to whitelist the website.")
+        elif input("\nIs the website blocked in your region? (yes/no): ").strip().lower() == "yes":
+            print("\n Solution: Use a VPN to access the website.")
+        elif input("\nIs your DNS server misconfigured? (yes/no): ").strip().lower() == "yes":
+            print("\n Solution: Switch to a public DNS (e.g., Google DNS: 8.8.8.8).")
+        else:
+            print("\n Solution: Clear your browser cache or try accessing the website from a different device.")
+
+    elif problem == "4":  # Slow download speeds
+        if input("\nAre you using a 2.4GHz Wi-Fi band? (yes/no): ").strip().lower() == "yes":
+            print("\n Solution: Switch to the 5GHz band or use an Ethernet cable.")
+        elif input("\nAre there too many devices on your network? (yes/no): ").strip().lower() == "yes":
+            print("\n Solution: Disconnect unused devices to free up bandwidth.")
+        elif input("\nIs your internet plan sufficient for your needs? (yes/no): ").strip().lower() == "no":
+            print("\n Solution: Upgrade to a higher-speed internet plan.")
+        else:
+            print("\n Solution: Restart your router and avoid peak usage times.")
+
+    elif problem == "5":  # Inconsistent connection
+        if input("\nHave you tried flushing your DNS cache? (yes/no): ").strip().lower() == "no":
+            print("\nSolution: Open the command prompt and enter 'ipconfig /flushdns'.")
+        elif input("\nIs your router overheating or old? (yes/no): ").strip().lower() == "yes":
+            print("\n Solution: Replace the router or ensure proper ventilation.")
+        elif input("\nIs your ISP experiencing outages? (yes/no): ").strip().lower() == "yes":
+            print("\nSolution: Contact your ISP for updates on the issue.")
+        else:
+            print("\nSolution: Test your connection with another device or network.")
+
+    elif problem == "6":  # Missing Wi-Fi option
+        if input("\nIs your network driver up to date? (yes/no): ").strip().lower() == "no":
+            print("\nSolution: Open Device Manager, reinstall your network driver, and reboot.")
+        elif input("\nIs your Wi-Fi card properly installed? (yes/no): ").strip().lower() == "no":
+            print("\nSolution: Ensure your Wi-Fi card is correctly connected to the motherboard.")
+        elif input("\nIs airplane mode enabled? (yes/no): ").strip().lower() == "yes":
+            print("\nSolution: Disable airplane mode in your system settings.")
+        else:
+            print("\nSolution: Check your BIOS settings to ensure the Wi-Fi card is enabled.")
+
+    else:
+        print("\nNo solution found. Consider contacting your Internet Service Provider (ISP).")
+
+
 
 
 
@@ -694,8 +773,8 @@ class Motherboard:
         """Checks the beep code against the stored rules and returns the diagnosis (case insensitive)."""
         code_lower = code.lower()  # Convert user input to lowercase
         if code_lower in self.beep_codes:
-            return f"🔍 Detected Issue for {self.brand}: {self.beep_codes[code_lower]}"
-        return "⚠️ Beep code not recognized. Check the manufacturer’s manual."
+            return f"Detected Issue for {self.brand}: {self.beep_codes[code_lower]}"
+        return "Beep code not recognized. Check the manufacturer’s manual."
 
 
 
@@ -762,33 +841,33 @@ def forward_chaining(category, key):
         error_data = rule_sets[category][key]
 
         #  Display the detected error
-        print(f"\n🔍 Detected {category} Error: {key} - {error_data['error_name']}")
+        print(f"\nDetected {category} Error: {key} - {error_data['error_name']}")
 
         #  Display consideration message if available
         if "consideration" in error_data:
-            print(f"\n⚠️ Consideration: {error_data['consideration']}")
+            print(f"\nConsideration: {error_data['consideration']}")
 
         #  Loop through solutions step-by-step
         solutions = error_data["solutions"]
         for i, solution in enumerate(solutions, start=1):
-            print(f"\n🔧 Suggested Solution {i}: {solution}")
+            print(f"\nSuggested Solution {i}: {solution}")
             
             #  Ask the user if the solution worked
             response = input("\nDid this solution work? (yes/no): ").strip().lower()
 
             # Ensure valid input
             while response not in ["yes", "no"]:
-                response = input("❌ Invalid input! Please enter 'yes' or 'no': ").strip().lower()
+                response = input("Invalid input! Please enter 'yes' or 'no': ").strip().lower()
 
             #  If the solution worked, stop troubleshooting
             if response == "yes":
-                print("\n✅ Thank you for using our system! Your issue has been resolved.")
+                print("\n Thank you for using our system! Your issue has been resolved.")
                 return  
 
         #  If no solution worked, suggest contacting support
-        print("\n❌ No solution worked, consider seeking further assistance.")
+        print("\nNo solution worked, consider seeking further assistance.")
     else:
-        print("\n⚠️ Error not found. Please check online resources.")
+        print("\nError not found. Please check online resources.")
 
 
 
@@ -886,14 +965,18 @@ def backward_chaining_beep_code():
 # DECISION TREE FUNCTION (Progressive Troubleshooting)
 # -----------------------------
 def troubleshoot():
-    """Uses a decision tree to guide users through step-by-step troubleshooting."""
+    # Uses a decision tree to guide users through step-by-step troubleshooting.
     print("\n🔍 Troubleshooting Wizard")
-
-    print("\nIs your PC turning on? (yes/no)")
+    print("---------------------------------------")
+    print("\nPlease select an option from below (1-3)")
+    print("1 - General troubleshooting ")
+    Print("2 - Low FPS in games ")
+    print("3 - Slow PC performance ")
     answer = input().strip().lower()
-    
+    if answer == "1":
+        print("Is your PC powering on?")
     if answer == "no":
-        print("🔧 Check power supply, cables, and motherboard.")
+        print("Make sure your powersupply cables are connected and that the switch is on.")
     else:
         print("\nDoes Windows boot successfully? (yes/no)")
         answer = input().strip().lower()
@@ -976,7 +1059,6 @@ def main():
     elif choice == "5":
         print("\nDLL or Game Crash Troubleshooting:")
         print(forward_chaining("DLL Errors", "User32.dll crash"))
-        
         
     elif choice == "6":
         print("\n🔍 DirectX Compatibility Troubleshooting:")
