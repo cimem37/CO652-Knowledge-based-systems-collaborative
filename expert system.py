@@ -693,10 +693,10 @@ def backward_chaining_network():
     
     problem = input("\nWhat is the network issue you're facing? \nOptions: "
                     "\n1) Weak Wi-Fi signal"
-                    "\n2) High latency, "
+                    "\n2) High latency "
                     "\n3) Unable to access a website, "
-                    "\n4) Slow download speeds, "
-                    "\n5) Inconsistent connection, "
+                    "\n4) Slow download speeds "
+                    "\n5) Inconsistent connection "
                     "\n6) Missing Wi-Fi option \nEnter the number of your issue: ").strip()
     
     if problem == "1":  # Weak Wi-Fi signal
