@@ -347,7 +347,7 @@ def initialize_motherboard_data():
     ibm.add_beep_code("repeated short beeps", "Power supply or system board problem.")
     ibm.add_beep_code("1x long, 1x short", "System board problem.")
     ibm.add_beep_code("1x long, 2x short", "Graphics card problem (Mono/CGA video error).")
-    ibm.add_beep_code("1x long, 3x short", "Graphics card problem (EGA video error).")
+    ibm.add_beep_code("1x long 3x short", "Graphics card problem (EGA video error).")
     ibm.add_beep_code("3x long", "Keyboard problem.")
 
     # Dell Beep Codes
@@ -664,7 +664,9 @@ malware_issues = {
     "- Update antivirus definitions and use them to clean the system.\n"
     "- As a last resort, format the system and reinstall the operating system."
     ]
+    
     },
+
     "trojan": {
     "error_name": "trojan",
     "consideration": "Trojan horses disguise themselves as legitimate software while secretly performing malicious activities, like opening backdoors.",
@@ -686,6 +688,7 @@ malware_issues = {
   
 
 
+
 # -----------------------------
 #  BACKWARD CHAINING FUNCTION -NETWORK ISSUES
 # -----------------------------
@@ -695,11 +698,11 @@ def backward_chaining_network():
     
     problem = input("\nWhat is the network issue you're facing? \nOptions: "
                     "\n1) Weak Wi-Fi signal"
-                    "\n2) High latency "
-                    "\n3) Unable to access a website, "
-                    "\n4) Slow download speeds "
-                    "\n5) Inconsistent connection "
-                    "\n6) Missing Wi-Fi option \nEnter the number of your issue: ").strip()
+                    "\n2) High latency"
+                    "\n3) Unable to access a website"
+                    "\n4) Slow download speeds"
+                    "\n5) Inconsistent connection"
+                    "\n6) Missing Wi-Fi option \nEnter the number of your issue:").strip()
     
     if problem == "1":  # Weak Wi-Fi signal
         if input("\nAre you far from the router? (yes/no): ").strip().lower() == "yes":
@@ -1109,11 +1112,8 @@ def main():
         code = input("Enter the BSOD error code: ").strip()
         print(forward_chaining("BSOD", code))
     elif choice == "2":
-        print("\nGPU Troubleshooting:")
-        print("GPU Driver Timeout")
-        gpu_choice = input("Select issue (1): ").strip()
-        if gpu_choice == "1":
-            print(forward_chaining("GPU", "gpu driver timeout"))
+        print("\n GPU Troubleshooting: GPU Driver Timeout")
+        forward_chaining("GPU", "gpu driver timeout")
     elif choice == "3":
         print("\nDisplay Troubleshooting:")
         (forward_chaining("Display", "hdmi not detected"))
@@ -1132,6 +1132,7 @@ def main():
     elif choice == "7":
         print("\nNetwork Troubleshooting:")
         backward_chaining_network()
+        
     if choice == "8":
         (general_troubleshooting_wizard())
     elif choice == "9":
