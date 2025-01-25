@@ -649,7 +649,8 @@ malware_issues = {
         "- For sensitive tasks, use an on-screen virtual keyboard.",
         "Enable Multi factor authentication (MFA):\n"
         "- Secure online accounts with multi-factor authentication to mitigate stolen passwords."
-    ],
+    ]
+    },
     "rootkits": {
     "error_name": "rootkits",
     "consideration": "Rootkits hide deep within the operating system, providing attackers persistent access while evading detection.",
@@ -662,9 +663,10 @@ malware_issues = {
     "Update and Reinstall:\n"
     "- Update antivirus definitions and use them to clean the system.\n"
     "- As a last resort, format the system and reinstall the operating system."
-    ],
+    ]
+    },
     "trojan": {
-    "error_name": "trojan_horse",
+    "error_name": "trojan",
     "consideration": "Trojan horses disguise themselves as legitimate software while secretly performing malicious activities, like opening backdoors.",
     "solutions": [
         "Identify and Remove Suspicious Files:\n"
@@ -681,8 +683,8 @@ malware_issues = {
     ]
       }
     }
-  }
-}
+  
+
 
 # -----------------------------
 #  BACKWARD CHAINING FUNCTION -NETWORK ISSUES
