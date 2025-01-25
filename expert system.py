@@ -909,7 +909,7 @@ def backward_chaining_beep_code():
     """Asks the user to input beep code details and applies backward chaining to diagnose the issue."""
     motherboards = initialize_motherboard_data()
     
-    print("\n🔍 Motherboard Beep Code Troubleshooting")
+    print("\nMotherboard Beep Code Troubleshooting")
     print("Supported Brands: IBM, Dell, Macintosh")
     
     brand = input("\nEnter your motherboard brand: ").strip().capitalize()  # Fix: Normalize input case
@@ -919,7 +919,7 @@ def backward_chaining_beep_code():
     brand_lower = brand.lower()
 
     if brand_lower not in brand_mapping:
-        print("⚠️ Unsupported motherboard brand. Please check the manufacturer’s manual.")
+        print("Unsupported motherboard brand. Please check the manufacturer’s manual.")
         return
 
     selected_brand = brand_mapping[brand_lower]  # Get correct key format for dictionary lookup
@@ -966,7 +966,7 @@ def backward_chaining_beep_code():
 # -----------------------------
 def troubleshoot():
     # Uses a decision tree to guide users through step-by-step troubleshooting.
-    print("\n🔍 Troubleshooting Wizard")
+    print("\nTroubleshooting Wizard")
     print("---------------------------------------")
     print("\nPlease select an option from below (1-3)")
     print("1 - General troubleshooting ")
@@ -981,15 +981,15 @@ def troubleshoot():
         print("\nDoes Windows boot successfully? (yes/no)")
         answer = input().strip().lower()
         if answer == "no":
-            print("🔧 Try Safe Mode or System Restore.")
+            print(" Try Safe Mode or System Restore.")
         else:
             print("\nIs your PC freezing or slow? (yes/no)")
             answer = input().strip().lower()
             if answer == "yes":
-                print("🔧 Check Task Manager for high CPU/RAM usage.")
-                print("🔧 Run a malware scan to detect background processes.")
+                print(" Check Task Manager for high CPU/RAM usage.")
+                print(" Run a malware scan to detect background processes.")
             else:
-                print("✅ Your system seems good. Make sure to keep your drivers updated.")
+                print("Your system seems good. Make sure to keep your drivers updated.")
 
 
 
@@ -1052,7 +1052,7 @@ def main():
         if gpu_choice == "1":
             print(forward_chaining("GPU", "gpu driver timeout"))
     elif choice == "3":
-        print("\n🔍 Display Troubleshooting:")
+        print("\nDisplay Troubleshooting:")
         (forward_chaining("Display", "hdmi not detected"))
     elif choice == "4":
         backward_chaining_beep_code()
@@ -1061,7 +1061,7 @@ def main():
         print(forward_chaining("DLL Errors", "User32.dll crash"))
         
     elif choice == "6":
-        print("\n🔍 DirectX Compatibility Troubleshooting:")
+        print("\nDirectX Compatibility Troubleshooting:")
 
         # Automatically display DirectX troubleshooting solutions
         forward_chaining("DirectX", "directx compatibility issue")
@@ -1072,11 +1072,11 @@ def main():
     elif choice == "8":
         troubleshoot()
     elif choice == "9":
-        print("\n🔍 Malware & Virus Troubleshooting:")
+        print("\nMalware & Virus Troubleshooting:")
         malware_type = input("Please enter the malware type: ").strip()
         print(forward_chaining("Malware", malware_type))
     else:
-        print("⚠️ Invalid selection. Returning to main menu.")
+        print("Invalid selection. Returning to main menu.")
 
 # Runs the expert system
 if __name__ == "__main__":
