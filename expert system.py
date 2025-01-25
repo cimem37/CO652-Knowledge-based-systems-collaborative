@@ -439,6 +439,58 @@ directx_errors = {
     }
 }
 
+
+
+
+
+
+
+low_fps_knowledge_base = {
+    "monitor_connected_to_gpu": "Make sure your monitor is connected to your dedicated graphics card and not your CPU’s integrated graphics.",
+    "gpu_drivers_updated": "Update your GPU drivers. Different workloads may require different driver versions.",
+    "meets_system_requirements": "Check system requirements and upgrade components if needed.",
+    "optimized_in_game_settings": "Reduce graphics settings to improve FPS.",
+    "not_overheating": "Improve cooling, reapply thermal paste, or consider undervolting your CPU/GPU.",
+    "correct_pcie_config": "Check BIOS settings to ensure GPU is in PCIE Gen 3 or Gen 4 mode.",
+    "no_background_processes": "Close unnecessary background programs using Task Manager."
+}
+
+
+
+
+
+slow_pc_knowledge_base = {
+    "pc_restarted": "Restart your PC to clear temporary files and refresh system processes.",
+    "no_background_apps": "Close unnecessary background processes using Task Manager.",
+    "startup_programs_disabled": "Disable startup programs in Task Manager.",
+    "enough_disk_space": "Free up disk space and use Disk Cleanup.",
+    "no_malware": "Run a full system malware scan.",
+    "windows_and_drivers_updated": "Update Windows and system drivers.",
+    "high_performance_mode": "Change power settings to High Performance in Control Panel.",
+    "adjusted_visual_effects": "Disable unnecessary visual effects in 'Performance Options'.",
+    "sfc_disk_check_done": "Run 'sfc /scannow' and 'chkdsk C: /f /r' in Command Prompt.",
+    "sufficient_ram": "Consider upgrading your RAM for better multitasking.",
+    "using_ssd": "Upgrade to an SSD for faster performance.",
+    "windows_reset_done": "Reset Windows via Settings > Update & Security > Recovery."
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 network_fixes = {
     "slow internet": "Check Wi-Fi/Ethernet connection, restart router, verify ISP issues.",
     "no connection": "Restart router, check network adapter, test with a different device."
@@ -903,7 +955,7 @@ def forward_chaining(category, key):
 
 
 # -----------------------------
-# 3️⃣ BACKWARD CHAINING FUNCTION (Diagnosing Beep Codes) - FIXED
+# BACKWARD CHAINING FUNCTION (Diagnosing Beep Codes) - FIXED
 # -----------------------------
 def backward_chaining_beep_code():
     """Asks the user to input beep code details and applies backward chaining to diagnose the issue."""
@@ -930,6 +982,25 @@ def backward_chaining_beep_code():
     print(f"\n{diagnosis}")
 
 
+def backward_chaining(problem, knowledge_base):
+    """Inference Engine: Applies Backward Chaining to diagnose the issue."""
+    print(f"\n Diagnosing {problem}...")
+
+    for solution, condition in knowledge_base.items():
+        response = input(f"\nDid you? {condition.replace('_', ' ').capitalize()}? (yes/no): ").strip().lower()
+
+        while response not in ["yes", "no"]:
+            response = input("Invalid input! Please enter 'yes' or 'no': ").strip().lower()
+
+        if response == "no":
+            print(f"\n Solution: {condition}")
+            return  # Stop once a solution is found
+
+    print("\n No clear cause found. Consider hardware upgrades or consulting a specialist.")
+
+    
+
+
 
 
 
@@ -962,34 +1033,24 @@ def backward_chaining_beep_code():
 
 
 # -----------------------------
-# DECISION TREE FUNCTION (Progressive Troubleshooting)
+# GENERAL TROUBLESHOOTING WIZARD MENU
 # -----------------------------
-def troubleshoot():
-    # Uses a decision tree to guide users through step-by-step troubleshooting.
-    print("\nTroubleshooting Wizard")
-    print("---------------------------------------")
-    print("\nPlease select an option from below (1-3)")
-    print("1 - General troubleshooting ")
-    Print("2 - Low FPS in games ")
-    print("3 - Slow PC performance ")
-    answer = input().strip().lower()
-    if answer == "1":
-        print("Is your PC powering on?")
-    if answer == "no":
-        print("Make sure your powersupply cables are connected and that the switch is on.")
+
+def general_troubleshooting_wizard():
+    """Allows the user to select between Low FPS Troubleshooting and Slow PC Performance Troubleshooting."""
+    print("\n General Troubleshooting Wizard")
+    print("1. Troubleshoot Low FPS in Games")
+    print("2. Troubleshoot Lag / Slow PC Performance")
+
+    choice = input("\nEnter your choice (1 or 2): ").strip()
+
+    if choice == "1":
+        backward_chaining("Low FPS in Games", low_fps_knowledge_base)
+    elif choice == "2":
+        backward_chaining("Lag / Slow PC Performance", slow_pc_knowledge_base)
     else:
-        print("\nDoes Windows boot successfully? (yes/no)")
-        answer = input().strip().lower()
-        if answer == "no":
-            print(" Try Safe Mode or System Restore.")
-        else:
-            print("\nIs your PC freezing or slow? (yes/no)")
-            answer = input().strip().lower()
-            if answer == "yes":
-                print(" Check Task Manager for high CPU/RAM usage.")
-                print(" Run a malware scan to detect background processes.")
-            else:
-                print("Your system seems good. Make sure to keep your drivers updated.")
+        print("Invalid selection. Returning to the main menu.")
+
 
 
 
@@ -1069,8 +1130,8 @@ def main():
     elif choice == "7":
         print("\nNetwork Troubleshooting:")
         backward_chaining("slow internet")
-    elif choice == "8":
-        troubleshoot()
+    if choice == "8":
+        (general_troubleshooting_wizard())
     elif choice == "9":
         print("\nMalware & Virus Troubleshooting:")
         malware_type = input("Please enter the malware type: ").strip()
