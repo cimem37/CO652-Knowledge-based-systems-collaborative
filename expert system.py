@@ -1129,7 +1129,7 @@ def main():
 
     elif choice == "7":
         print("\nNetwork Troubleshooting:")
-        backward_chaining("slow internet")
+        backward_chaining_network()
     if choice == "8":
         (general_troubleshooting_wizard())
     elif choice == "9":
