@@ -335,10 +335,39 @@ display_errors = {
 }
 
 
-motherboard_beep_codes = {
-    "3 beeps": "RAM issue → Check RAM compatibility.",
-    "5 beeps": "CPU failure → Reseat processor or check cooling system."
-}
+def initialize_motherboard_data():
+    """Creates motherboard objects and assigns beep code rules."""
+    
+    # IBM Beep Codes
+    ibm = Motherboard("IBM")
+    ibm.add_beep_code("1x short", "No errors detected during the self-test.")
+    ibm.add_beep_code("2x short", "Error during the POST; more details displayed on screen.")
+    ibm.add_beep_code("no beep (0)", "Power supply/system board/processor error; often related to power supply.")
+    ibm.add_beep_code("continuous beep", "Power supply/system board/keyboard problem.")
+    ibm.add_beep_code("repeated short beeps", "Power supply or system board problem.")
+    ibm.add_beep_code("1x long, 1x short", "System board problem.")
+    ibm.add_beep_code("1x long, 2x short", "Graphics card problem (Mono/CGA video error).")
+    ibm.add_beep_code("1x long, 3x short", "Graphics card problem (EGA video error).")
+    ibm.add_beep_code("3x long", "Keyboard problem.")
+
+    # Dell Beep Codes
+    dell = Motherboard("Dell")
+    dell.add_beep_code("1x short 1x short 2x short", "Keyboard controller test failure.")
+    dell.add_beep_code("3x short 2x short 4x short", "Keyboard controller test failure.")
+    dell.add_beep_code("3x short 3x short 1x short", "NVRAM power loss.")
+    dell.add_beep_code("3x short 3x short 4x short", "Video memory test failure.")
+    dell.add_beep_code("3x short 4x short 1x short", "Screen initialization failure.")
+    dell.add_beep_code("4x short 2x short 2x short", "Shutdown failure.")
+    dell.add_beep_code("4x short 4x short 4x short", "Cache test failure.")
+
+    # Macintosh Beep Codes
+    mac = Motherboard("Macintosh")
+    mac.add_beep_code("3x short 5s pause 3x short", "RAM did not pass data integrity check.")
+    mac.add_beep_code("1x long", "[Occurs while holding the power button] EFI ROM update in progress (for pre-2012 models).")
+    mac.add_beep_code("3x long 2x short 3x long", "EFI ROM error or Mac is in EFI ROM recovery mode.")
+
+    return {"IBM": ibm, "Dell": dell, "Macintosh": mac}
+
 
 dll_crashes = {
     "User32.dll crash": {
@@ -649,6 +678,28 @@ malware_issues = {
 # -----------------------------
 # THIS IS THE FRAME-BASED REPRESENTATION (For Hardware Components)
 # -----------------------------
+
+
+class Motherboard:
+    """Base class representing a motherboard brand and its beep codes."""
+    def __init__(self, brand):
+        self.brand = brand
+        self.beep_codes = {}  # Dictionary to store beep codes and their meanings
+
+    def add_beep_code(self, code, meaning):
+        """Adds beep code error information to the motherboard class (stored in lowercase for case-insensitivity)."""
+        self.beep_codes[code.lower()] = meaning  # Store beep codes in lowercase for case-insensitive matching
+
+    def diagnose_beep_code(self, code):
+        """Checks the beep code against the stored rules and returns the diagnosis (case insensitive)."""
+        code_lower = code.lower()  # Convert user input to lowercase
+        if code_lower in self.beep_codes:
+            return f"🔍 Detected Issue for {self.brand}: {self.beep_codes[code_lower]}"
+        return "⚠️ Beep code not recognized. Check the manufacturer’s manual."
+
+
+
+
 class HardwareComponent:
     """Models hardware components for diagnosis."""
     def __init__(self, name, status):
@@ -664,6 +715,8 @@ class HardwareComponent:
             elif self.name == "BIOS":
                 return "Verify BIOS settings for system stability (XMP, TPM, UEFI)."
         return f"{self.name} is functioning normally."
+
+
 
     
 
@@ -771,16 +824,32 @@ def forward_chaining(category, key):
 
 
 # -----------------------------
-#BACKWARD CHAINING FUNCTION (Goal-Driven Diagnosis)
+# 3️⃣ BACKWARD CHAINING FUNCTION (Diagnosing Beep Codes) - FIXED
 # -----------------------------
-def backward_chaining(issue):
-    """Verifies possible causes before suggesting a solution using backward chaining."""
-    known_issues = {**network_fixes, **bios_settings, **display_errors, **other_issues}  
-    if issue in known_issues:
-        print(f"\n🔎 To resolve '{issue}', follow these steps:")
-        print(f"- {known_issues[issue]}")
-    else:
-        print("⚠️ Issue not recognized. Consider further troubleshooting.")
+def backward_chaining_beep_code():
+    """Asks the user to input beep code details and applies backward chaining to diagnose the issue."""
+    motherboards = initialize_motherboard_data()
+    
+    print("\n🔍 Motherboard Beep Code Troubleshooting")
+    print("Supported Brands: IBM, Dell, Macintosh")
+    
+    brand = input("\nEnter your motherboard brand: ").strip().capitalize()  # Fix: Normalize input case
+
+    # Fix: Allow case-insensitive matching for brands
+    brand_mapping = {key.lower(): key for key in motherboards.keys()}  # Create lowercase mapping
+    brand_lower = brand.lower()
+
+    if brand_lower not in brand_mapping:
+        print("⚠️ Unsupported motherboard brand. Please check the manufacturer’s manual.")
+        return
+
+    selected_brand = brand_mapping[brand_lower]  # Get correct key format for dictionary lookup
+
+    beep_code = input("Enter the beep code pattern (e.g., '1x short', '3x long', 'continuous beep'): ").strip().lower()
+    diagnosis = motherboards[selected_brand].diagnose_beep_code(beep_code)
+
+    print(f"\n{diagnosis}")
+
 
 
 
@@ -903,13 +972,7 @@ def main():
         print("\n🔍 Display Troubleshooting:")
         (forward_chaining("Display", "hdmi not detected"))
     elif choice == "4":
-        print("\nMotherboard Beep Codes:")
-        beep_code = input("Enter the beep code number (e.g., 3 beeps): ").strip()
-        if beep_code in motherboard_beep_codes:
-            print(f"Detected Issue: {motherboard_beep_codes[beep_code]}")
-        else:
-            print("⚠️ Unknown beep code.")
-            
+        backward_chaining_beep_code()
     elif choice == "5":
         print("\nDLL or Game Crash Troubleshooting:")
         print(forward_chaining("DLL Errors", "User32.dll crash"))
