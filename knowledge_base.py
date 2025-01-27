@@ -2,7 +2,7 @@
 # THIS IS OUR KNOWLEDGE BASE (RULE-BASED SYSTEM)
 # -----------------------------
 
-from test import Motherboard
+from expert_system import Motherboard
 
 bsod_errors = {
     "0x0000000A": {
