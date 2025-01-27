@@ -5,8 +5,61 @@ import sys
 from knowledge_base import *
 
 
+
 # -----------------------------
-#  BACKWARD CHAINING FUNCTION -NETWORK ISSUES
+# FORWARD CHAINING FUNCTION (Rule-Based System)
+# -----------------------------
+def forward_chaining(category, key):
+    """Matches known error conditions with solutions using forward chaining and interactive troubleshooting."""
+    
+    # Define category rule sets
+    rule_sets = {
+        "BSOD": bsod_errors,
+        "GPU": gpu_issues,
+        "DirectX": directx_errors,
+        "DLL Errors": dll_crashes,       
+        "Malware": malware_issues,
+        "Display": display_errors
+    }
+    
+    # Check if the error exists in the selected category
+    if category in rule_sets and key in rule_sets[category]:
+        error_data = rule_sets[category][key]
+
+        #  Display the detected error
+        print(f"\nDetected {category} Error: {key} - {error_data['error_name']}")
+
+        #  Display consideration message if available
+        if "consideration" in error_data:
+            print(f"\nConsideration: {error_data['consideration']}")
+
+        #  Loop through solutions step-by-step
+        solutions = error_data["solutions"]
+        for i, solution in enumerate(solutions, start=1):
+            print(f"\nSuggested Solution {i}: {solution}")
+            
+            #  Ask the user if the solution worked
+            response = input("\nDid this solution work? (yes/no): ").strip().lower()
+
+            # Ensure valid input
+            while response not in ["yes", "no"]:
+                response = input("Invalid input! Please enter 'yes' or 'no': ").strip().lower()
+
+            #  If the solution worked, stop troubleshooting
+            if response == "yes":
+                print("\n Thank you for using our system! Your issue has been resolved.")
+                return  
+
+        #  If no solution worked, suggest contacting support
+        print("\nNo solution worked, consider seeking further assistance.")
+    else:
+        print("\nError not found. Please check online resources.")
+
+
+
+
+# -----------------------------
+#  BACKWARD CHAINING FUNCTION 
 # -----------------------------
 def backward_chaining_network():
     
@@ -85,99 +138,6 @@ def backward_chaining_network():
 
 
 
-
-
-
-
-
-
-# -----------------------------
-# FRAME-BASED REPRESENTATION 
-# -----------------------------
-
-
-class Motherboard:
-    """Base class representing a motherboard brand and its beep codes."""
-    def __init__(self, brand):
-        self.brand = brand
-        self.beep_codes = {}  # Dictionary to store beep codes and their meanings
-
-    def add_beep_code(self, code, meaning):
-        """Adds beep code error information to the motherboard class (stored in lowercase for case-insensitivity)."""
-        self.beep_codes[code.lower()] = meaning  # Store beep codes in lowercase for case-insensitive matching
-
-    def diagnose_beep_code(self, code):
-        """Checks the beep code against the stored rules and returns the diagnosis (case insensitive)."""
-        code_lower = code.lower()  # Convert user input to lowercase
-        if code_lower in self.beep_codes:
-            return f"Detected Issue for {self.brand}: {self.beep_codes[code_lower]}"
-        return "Beep code not recognized. Check the manufacturer’s manual."
-
-
-
-
-
-
-
-# -----------------------------
-# FORWARD CHAINING FUNCTION (Rule-Based System)
-# -----------------------------
-def forward_chaining(category, key):
-    """Matches known error conditions with solutions using forward chaining and interactive troubleshooting."""
-    
-    # Define category rule sets
-    rule_sets = {
-        "BSOD": bsod_errors,
-        "GPU": gpu_issues,
-        "DirectX": directx_errors,
-        "DLL Errors": dll_crashes,       
-        "Malware": malware_issues,
-        "Display": display_errors
-    }
-    
-    # Check if the error exists in the selected category
-    if category in rule_sets and key in rule_sets[category]:
-        error_data = rule_sets[category][key]
-
-        #  Display the detected error
-        print(f"\nDetected {category} Error: {key} - {error_data['error_name']}")
-
-        #  Display consideration message if available
-        if "consideration" in error_data:
-            print(f"\nConsideration: {error_data['consideration']}")
-
-        #  Loop through solutions step-by-step
-        solutions = error_data["solutions"]
-        for i, solution in enumerate(solutions, start=1):
-            print(f"\nSuggested Solution {i}: {solution}")
-            
-            #  Ask the user if the solution worked
-            response = input("\nDid this solution work? (yes/no): ").strip().lower()
-
-            # Ensure valid input
-            while response not in ["yes", "no"]:
-                response = input("Invalid input! Please enter 'yes' or 'no': ").strip().lower()
-
-            #  If the solution worked, stop troubleshooting
-            if response == "yes":
-                print("\n Thank you for using our system! Your issue has been resolved.")
-                return  
-
-        #  If no solution worked, suggest contacting support
-        print("\nNo solution worked, consider seeking further assistance.")
-    else:
-        print("\nError not found. Please check online resources.")
-
-
-
-
-
-
-
-
-# -----------------------------
-# BACKWARD CHAINING FUNCTION  
-# -----------------------------
 def backward_chaining_beep_code():
     """Asks the user to input beep code details and applies backward chaining to diagnose the issue."""
     motherboards = initialize_motherboard_data()
@@ -219,7 +179,36 @@ def backward_chaining(problem, knowledge_base):
 
     print("\n No clear cause found. Consider hardware upgrades or consulting a specialist.")
 
-    
+
+
+
+
+
+# -----------------------------
+# FRAME-BASED REPRESENTATION 
+# -----------------------------
+
+
+class Motherboard:
+    """Base class representing a motherboard brand and its beep codes."""
+    def __init__(self, brand):
+        self.brand = brand
+        self.beep_codes = {}  # Dictionary to store beep codes and their meanings
+
+    def add_beep_code(self, code, meaning):
+        """Adds beep code error information to the motherboard class (stored in lowercase for case-insensitivity)."""
+        self.beep_codes[code.lower()] = meaning  # Store beep codes in lowercase for case-insensitive matching
+
+    def diagnose_beep_code(self, code):
+        """Checks the beep code against the stored rules and returns the diagnosis (case insensitive)."""
+        code_lower = code.lower()  # Convert user input to lowercase
+        if code_lower in self.beep_codes:
+            return f"Detected Issue for {self.brand}: {self.beep_codes[code_lower]}"
+        return "Beep code not recognized. Check the manufacturer’s manual."
+
+
+
+
 
 # -----------------------------
 # GENERAL TROUBLESHOOTING WIZARD 
@@ -243,21 +232,6 @@ def general_troubleshooting_wizard():
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-          
-
 # -----------------------------
 #  MAIN FUNCTION MENU (User Interaction)
 # -----------------------------
@@ -280,7 +254,7 @@ def main():
         code = input("Enter the BSOD error code: ").strip()
         print(forward_chaining("BSOD", code))
     elif choice == "2":
-        print("\n GPU Troubleshooting: GPU Driver Timeout")
+        print("\n GPU Troubleshooting...")
         forward_chaining("GPU", "gpu driver timeout")
     elif choice == "3":
         print("\nDisplay Troubleshooting:")
