@@ -441,10 +441,6 @@ directx_errors = {
 
 
 
-
-
-
-
 low_fps_knowledge_base = {
     "monitor_connected_to_gpu": "Make sure your monitor is connected to your dedicated graphics card and not your CPU’s integrated graphics.",
     "gpu_drivers_updated": "Update your GPU drivers. Different workloads may require different driver versions.",
@@ -454,9 +450,6 @@ low_fps_knowledge_base = {
     "correct_pcie_config": "Check BIOS settings to ensure GPU is in PCIE Gen 3 or Gen 4 mode.",
     "no_background_processes": "Close unnecessary background programs using Task Manager."
 }
-
-
-
 
 
 slow_pc_knowledge_base = {
@@ -475,35 +468,6 @@ slow_pc_knowledge_base = {
 }
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-network_fixes = {
-    "slow internet": "Check Wi-Fi/Ethernet connection, restart router, verify ISP issues.",
-    "no connection": "Restart router, check network adapter, test with a different device."
-}
-
-other_issues = {
-    "firewall blocking": "Check firewall settings and whitelist trusted websites."
-}
-
-bios_settings = {
-    "xmp disabled": "Enable XMP in BIOS to run RAM at rated speed.",
-    "tpm 2.0 missing": "Enable TPM 2.0 in BIOS for Windows security features."
-}
 
 malware_issues = {
     "virus": {
@@ -689,6 +653,12 @@ malware_issues = {
 
 
 
+
+
+
+
+
+
 # -----------------------------
 #  BACKWARD CHAINING FUNCTION -NETWORK ISSUES
 # -----------------------------
@@ -775,44 +745,8 @@ def backward_chaining_network():
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 # -----------------------------
-# THIS IS THE FRAME-BASED REPRESENTATION (For Hardware Components)
+# FRAME-BASED REPRESENTATION 
 # -----------------------------
 
 
@@ -836,42 +770,6 @@ class Motherboard:
 
 
 
-class HardwareComponent:
-    """Models hardware components for diagnosis."""
-    def __init__(self, name, status):
-        self.name = name
-        self.status = status
-
-    def diagnose(self):
-        if self.status == "faulty":
-            if self.name == "PC Fan":
-                return "Check BIOS settings for fan control. Ensure fan is physically connected."
-            elif self.name == "RAM":
-                return "Check if RAM is properly seated and compatible with the motherboard."
-            elif self.name == "BIOS":
-                return "Verify BIOS settings for system stability (XMP, TPM, UEFI)."
-        return f"{self.name} is functioning normally."
-
-
-
-    
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 
@@ -886,9 +784,7 @@ def forward_chaining(category, key):
         "BSOD": bsod_errors,
         "GPU": gpu_issues,
         "DirectX": directx_errors,
-        "DLL Errors": dll_crashes,
-        "Firewall": other_issues,
-        "Network": network_fixes,
+        "DLL Errors": dll_crashes,       
         "Malware": malware_issues,
         "Display": display_errors
     }
@@ -933,34 +829,8 @@ def forward_chaining(category, key):
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 # -----------------------------
-# BACKWARD CHAINING FUNCTION (Diagnosing Beep Codes) - FIXED
+# BACKWARD CHAINING FUNCTION  
 # -----------------------------
 def backward_chaining_beep_code():
     """Asks the user to input beep code details and applies backward chaining to diagnose the issue."""
@@ -1005,40 +875,8 @@ def backward_chaining(problem, knowledge_base):
 
     
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 # -----------------------------
-# GENERAL TROUBLESHOOTING WIZARD MENU
+# GENERAL TROUBLESHOOTING WIZARD 
 # -----------------------------
 
 def general_troubleshooting_wizard():
@@ -1072,23 +910,7 @@ def general_troubleshooting_wizard():
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-                
+          
 
 # -----------------------------
 #  MAIN FUNCTION MENU (User Interaction)
